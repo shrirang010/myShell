@@ -89,7 +89,7 @@ int checkforPS1_command(char *user_arguement1)
     int len, i;
     if (!strncmp(temp, user_arguement1, 5)) // checking for PS1="
     {
-        len = strlen(user_arguement1);
+        len = (int)strlen(user_arguement1);
         if (!strcmp(lastchar, user_arguement1 + len - 1) && len > 6) // checking for last " from PS1="abcd" and  total length is more than 6 so that there is data in " "
         {
             return 1;
@@ -207,9 +207,10 @@ int main()
     char *cwd;
     int status;
     char *prompt = (char *)malloc(1024 * sizeof(char));
-    int promptSet = 0;
+    int promptSet = 0;        // flag to check if Prompt has been changed or is default (promptSet = 1 means  prompt changed , 0 means prompt has not been changed )
     int fd;
-
+                            printf("\033[1;35m");
+                            printf("\n\t\t\t\t\t\t\tWelcome to my Shell\n");
     while (1)
 
     {
@@ -233,7 +234,9 @@ int main()
         token = strtok(commandinput, " ");
 
         if (!strcmp(token, "exit"))
-        {
+        {   
+            printf("\033[1;34m");            
+            printf("\t\t\t\t\t\t\tShell Exited Successfully !\n");
             return 0;
         }
 
@@ -284,7 +287,10 @@ int main()
         path = find_valid_path(arguements[0], PATH);
         if (path == NULL)
         {
-            printf("command not found in %s\n", PATH);
+            printf("%s:command not found in path\n",arguements[0]);
+            token,path = NULL;
+            argcount, i = 0;
+            continue;
         }
 
         int p = fork();
@@ -293,13 +299,13 @@ int main()
             int val1 = checkforOutput_Redirection(arguements); // function returns index of > if present else returns INT_MIN
             if (val1 != INT_MIN)
             {
-                Output_Redirection(arguements, val1);
+                Output_Redirection(arguements, val1);  // val1 is index in the arguement array where > was found 
             }
 
-            int val2 = checkforInput_Redirection(arguements);
+            int val2 = checkforInput_Redirection(arguements); // function returns index of  if present else returns INT_MAX
             if (val2 != INT_MAX)
             {
-                InputRedirection(arguements, val2);
+                InputRedirection(arguements, val2);   // val2 is index in the arguement array where < was found 
             }
 
             ret = execv(path, arguements);
