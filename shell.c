@@ -155,7 +155,7 @@ void Output_Redirection(char *arguements[], int index)
     {
         int new_fd = dup(fd); // as fd[1] points to NULL ,new_fd will occupy fd[1] and point to where fd is pointing i.e on the screen
         close(fd);
-        printf("unable to open file:%s", arguements[index + 1]);
+        printf("unable to open file:%s\n", arguements[index + 1]);
         exit(0);
     }
     arguements[index] = NULL;
@@ -192,7 +192,7 @@ void InputRedirection(char *user_command[], int index) // index is the the index
 }
 
 int main()
-{
+{   
     char *PATH = getenv("PATH");
     strcat(PATH,":");
     strcat(PATH,".");
@@ -228,7 +228,6 @@ int main()
 
         printf("\033[0;37m");
         scanf("%[^\n]%*c", commandinput);
-
         i = 0;
         token = NULL;
         token = strtok(commandinput, " ");
@@ -252,7 +251,7 @@ int main()
             cwd = changeCWD(arguements[1]);
             if (cwd == NULL)
             {
-                printf("%s: No such file or Directory", arguements[1]);
+                printf("%s: No such file or Directory\n", arguements[1]);
             }
             argcount, i = 0;
             token, path = NULL;
@@ -271,6 +270,13 @@ int main()
         {
             PATH = changePATH(PATH, arguements[0]);
             token, path = NULL;
+            argcount, i = 0;
+            continue;
+        }
+        if(!strncmp("$PATH",arguements[0],5))  // PATH$ command prints current PATH environment
+        {
+            printf("%s\n",PATH);
+            token,path = NULL;
             argcount, i = 0;
             continue;
         }
