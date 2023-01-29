@@ -190,7 +190,41 @@ void InputRedirection(char *user_command[], int index) // index is the the index
 
     return;
 }
+int checkforHistory_command(char*argument[])
+{
+    if(!strcmp(argument[0],"History") && argument[1]== NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
+void printHistory()
+{
+    char line[1000];
+    FILE*fp=fopen("History.txt", "r");
+    while(fgets(line,strlen(line),fp)!=NULL)
+    {
+        printf("%s\n",line);
+    }
+    return ;
+}
+void Addto_History(char*arguments[],int argcount)
+{
+    FILE* fp;
+    int j=0;
+    fp=fopen("History.txt","a");
+    while(j!=argcount)
+    {   
+        fprintf(fp,arguments[j],strlen(arguments[j]));
+        j++;
+    }
+    fprintf(fp, "\n");
+    fclose(fp);
+}
 int main()
 {   
     char *PATH = getenv("PATH");
@@ -248,6 +282,16 @@ int main()
         }
         argcount = i;
         arguements[i] = NULL;
+
+        Addto_History(arguements,argcount);     //Add command to History 
+        
+        if(checkforHistory_command(arguements)) //Check for History command
+        {
+            printHistory();
+            argcount,i=0;
+            token,path=NULL;
+            continue;
+        }
 
         if (checkforCD_command(arguements[0]))
         {
