@@ -204,12 +204,13 @@ int checkforHistory_command(char*argument[])
 
 void printHistory()
 {
-    char line[1000];
+    char*line;
     FILE*fp=fopen("History.txt", "r");
-    while(fgets(line,strlen(line),fp)!=NULL)
+    while(fgets(line,sizeof(line),fp)!=NULL)
     {
-        printf("%s\n",line);
+        printf("%s",line);
     }
+    fclose(fp);
     return ;
 }
 void Addto_History(char*arguments[],int argcount)
@@ -326,7 +327,7 @@ int main()
             token,path = NULL;
             argcount, i = 0;
             continue;
-        }
+        } 
 
         path = find_valid_path(arguements[0], PATH);
         if (path == NULL)
