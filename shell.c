@@ -226,6 +226,19 @@ void Addto_History(char*arguments[],int argcount)
     fprintf(fp, "\n");
     fclose(fp);
 }
+int checkfor_Pipe(char*arguements)
+{
+    int i=0;
+    while(arguements[i]!=NULL)
+    {
+        if(!strcmp(arguements[i],"|") && i > 0)
+        {
+            return i;
+        }
+        i++;
+    }
+    return INT_MIN;
+}
 int main()
 {   
     char *PATH = getenv("PATH");
@@ -244,6 +257,7 @@ int main()
     char *prompt = (char *)malloc(1024 * sizeof(char));
     int promptSet = 0;        // flag to check if Prompt has been changed or is default (promptSet = 1 means  prompt changed , 0 means prompt has not been changed )
     int fd;
+    int pipe_Flag;
                             printf("\033[1;35m");
                             printf("\n\t\t\t\t\t\t\tWelcome to my Shell\n");
     while (1)
@@ -328,6 +342,11 @@ int main()
             argcount, i = 0;
             continue;
         } 
+        pipe_Flag = checkfor_Pipe(arguements);
+        // if(pipe_Flag !=INT_MIN)
+        // {
+                                    
+        // }
 
         path = find_valid_path(arguements[0], PATH);
         if (path == NULL)
