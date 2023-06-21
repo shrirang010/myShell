@@ -14,8 +14,7 @@ This Shell takes user command as input , finds appropriate executable for that c
 
 ## Screenshots
 
-![Screenshot from 2023-06-21 11-55-36](https://github.com/shrirang010/myShell/assets/103894310/a0826dbf-92b9-4f90-adcc-8d57fc44053b)
-
+![Screenshot from 2023-06-21 12-31-21](https://github.com/shrirang010/myShell/assets/103894310/b1c66d0c-32fd-4b69-a359-f0ed93ab53f5)
 
 
 ## Install and Run
