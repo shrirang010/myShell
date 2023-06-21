@@ -5,11 +5,16 @@
 This Shell takes user command as input , finds appropriate executable for that command on the host machine and finally runs it with all possible flags. 
 ### Features :
 1.Supports Input and Output redirection
+
+
 2.Provides support for PS1 command
+
+
 3.Ability to change and customize your Path variable(example: /bin,usr/bin,...)
 
 ## Screenshots
 
+![Screenshot from 2023-06-21 11-55-36](https://github.com/shrirang010/myShell/assets/103894310/a0826dbf-92b9-4f90-adcc-8d57fc44053b)
 
 
 
