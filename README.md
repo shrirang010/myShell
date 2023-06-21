@@ -21,7 +21,7 @@ This Shell takes user command as input , finds appropriate executable for that c
 
 ## Installation and Setup
 
-To set up the Game Recommendation System locally, follow these steps:
+To set up the myShell locally, follow these steps:
 
 1. **Clone the repository:** Start by cloning this repository to your local machine using the following command:
 
